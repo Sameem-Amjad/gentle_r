@@ -4,7 +4,7 @@ import { Container } from "./container";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-border/60 py-8 text-sm text-muted">
+    <footer className="surface-glass mt-16 border-t border-border/60 py-8 text-sm text-muted">
       <Container width="wide" className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p>
           {siteConfig.name} · for adults {siteConfig.minimumAge}+ · no timers, no streaks.

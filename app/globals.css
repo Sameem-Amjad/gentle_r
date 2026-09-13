@@ -71,6 +71,9 @@
   --sky-top: #fdfbf6;
   --sky-bottom: #f1eadb;
 
+  /* Plain CSS easing (also mirrored in @theme for utilities). */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
@@ -363,6 +366,120 @@
   background-size: 200% 100%;
   animation: var(--animate-shimmer);
   border-radius: var(--radius-sm);
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Entry reveals (components/motion/reveal.tsx)                          */
+/* CSS-driven so server HTML never hides text. "backwards" fill keeps  */
+/* the element hidden only during its delay and returns it to normal   */
+/* styles afterwards (so hover transforms keep working).                */
+/* ------------------------------------------------------------------ */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 14px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal {
+  animation: reveal-in 0.55s var(--ease-soft) backwards;
+  animation-delay: var(--reveal-delay, 0s);
+}
+.page-enter {
+  --reveal-y: 8px;
+  animation: reveal-in 0.4s var(--ease-soft) backwards;
+}
+
+/* Waiting for scroll (JS adds .reveal-wait to below-the-fold elements). */
+.reveal.reveal-wait,
+.reveal-wait .reveal {
+  animation: none;
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 14px));
+}
+
+/* Stagger: direct children get increasing delays; nested .reveal inherits. */
+.stagger {
+  --stagger-base: 0.05s;
+  --stagger-step: 0.07s;
+}
+.stagger > :nth-child(1) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 0 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(2) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 1 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(3) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 2 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(4) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 3 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(5) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 4 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(6) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 5 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(7) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 6 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(8) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 7 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(9) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 8 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(10) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 9 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(11) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 10 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(12) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 11 * var(--stagger-step, 0.07s));
+}
+.stagger > :nth-child(n + 13) {
+  --reveal-delay: calc(var(--stagger-base, 0.05s) + 12 * var(--stagger-step, 0.07s));
+}
+
+/* Reduced motion: fades only, no movement. */
+[data-motion="reduced"] .reveal,
+[data-motion="reduced"] .page-enter {
+  animation-name: reveal-fade;
+}
+[data-motion="reduced"] .reveal.reveal-wait,
+[data-motion="reduced"] .reveal-wait .reveal {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-motion="system"] .reveal,
+  [data-motion="system"] .page-enter {
+    animation-name: reveal-fade;
+  }
+  [data-motion="system"] .reveal.reveal-wait,
+  [data-motion="system"] .reveal-wait .reveal {
+    transform: none;
+  }
+}
+/* Motion off: never hide anything (the global rule already removes animation). */
+[data-motion="off"] .reveal.reveal-wait,
+[data-motion="off"] .reveal-wait .reveal {
+  opacity: 1;
+  transform: none;
 }
 
 /* Radix dialogs */

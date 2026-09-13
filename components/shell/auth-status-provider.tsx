@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import { hasSupabaseEnv } from "@/lib/env";
 
@@ -27,6 +28,7 @@ function fromUser(u: User | null | undefined): AuthStatusValue {
  */
 export function AuthStatusProvider({ children }: { children: React.ReactNode }) {
   const configured = hasSupabaseEnv();
+  const pathname = usePathname();
   const [value, setValue] = React.useState<AuthStatusValue>(configured ? UNKNOWN : UNCONFIGURED);
 
   React.useEffect(() => {
@@ -51,6 +53,29 @@ export function AuthStatusProvider({ children }: { children: React.ReactNode }) 
       unsubscribe?.();
     };
   }, [configured]);
+
+  // Server Actions (sign in, sign out, deletion) change the session cookie
+  // and then navigate without a full reload, which onAuthStateChange does not
+  // see. Re-reading the cookie-backed session after each navigation keeps the
+  // header in step. Cosmetic only; authorisation stays on the server.
+  React.useEffect(() => {
+    if (!configured) return;
+    let cancelled = false;
+    import("@/lib/supabase/client").then(({ createClient }) => {
+      if (cancelled) return;
+      createClient()
+        .auth.getSession()
+        .then(({ data }) => {
+          if (!cancelled) setValue(fromUser(data.session?.user));
+        })
+        .catch(() => {
+          // Leave the current status in place.
+        });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [configured, pathname]);
 
   return <AuthStatusContext.Provider value={value}>{children}</AuthStatusContext.Provider>;
 }
