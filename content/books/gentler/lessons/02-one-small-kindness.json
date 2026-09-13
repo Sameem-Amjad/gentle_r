@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "bookId": "gentler",
+  "lessonId": "one-small-kindness",
+  "order": 2,
+  "status": "placeholder",
+  "title": "One Small Kindness",
+  "subtitle": "Speaking to yourself as you would to a friend",
+  "summary": "Self-kindness is a habit of tone more than a feeling. This lesson looks at the voice we use with ourselves and offers one gentle way to soften it.",
+  "teaching": [
+    {
+      "type": "paragraph",
+      "text": "Listen for a moment to the voice that comments on your day. For many people it is quick, certain and a little sharp. It notices what went wrong before what went well. It would not be welcome at a friend's table, yet it sits at ours every evening."
+    },
+    {
+      "type": "paragraph",
+      "text": "Self-kindness does not ask you to believe anything untrue about yourself. It asks only for a change of tone: the tone you would use with someone you cared about who had the same hard day you did."
+    },
+    {
+      "type": "heading",
+      "text": "A small distinction"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Kindness is not the same as letting yourself off. You can be honest and gentle at once.",
+        "Kindness is not a mood you wait for. It is a sentence you choose.",
+        "Kindness gets easier with repetition, like any other habit of speech."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Research on self-compassion suggests that people who treat themselves with warmth after setbacks tend to recover and try again more readily than people who rely on harsh self-criticism. Warmth, it turns out, is not soft on results."
+    }
+  ],
+  "smallAction": {
+    "title": "Small Action",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Write one sentence to yourself in the journal, in the voice you would use for a good friend. It can be as plain as: \"Today was a lot, and you got through it.\""
+      },
+      {
+        "type": "paragraph",
+        "text": "One sentence is enough. You do not have to mean it fully yet."
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": "Self-Compassion: Dr Kristin Neff",
+      "url": "https://self-compassion.org/",
+      "note": "Definitions, research summaries and short practices."
+    },
+    {
+      "label": "Greater Good Science Center, UC Berkeley",
+      "url": "https://greatergood.berkeley.edu/",
+      "note": "Accessible summaries of research on compassion and wellbeing."
+    }
+  ],
+  "reflectionQuestions": [
+    "What did the voice in your head say about you today? Was it fair?",
+    "Who in your life speaks to you kindly? What do they sound like?",
+    "What would change if you borrowed that tone for one evening?"
+  ],
+  "encouragement": "A kinder tone is not something you earn. It is something you can start using now, clumsily, and that is fine."
+}

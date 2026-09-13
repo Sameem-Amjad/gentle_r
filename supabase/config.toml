@@ -1,0 +1,18 @@
+# Minimal Supabase CLI project config. Values here only affect the local CLI
+# (`supabase link`, `supabase db push`). Hosted project settings are managed
+# in the Supabase dashboard; see docs/SUPABASE_SETUP.md.
+project_id = "gentler"
+
+[db]
+major_version = 17
+
+[auth]
+# Emails must be confirmed before a session is issued.
+enable_signup = true
+enable_confirmations = true
+minimum_password_length = 8
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true

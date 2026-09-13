@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "bookId": "gentler",
+  "title": "GentleR",
+  "subtitle": "Three quiet lessons",
+  "author": "Jonathan Kawira",
+  "description": "Three short lessons to read at your own pace, each with one small, optional action. Nothing to complete. Nothing to keep up with.",
+  "status": "placeholder",
+  "lessons": [
+    "01-arriving.json",
+    "02-one-small-kindness.json",
+    "03-rest-without-earning-it.json"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "bookId": "gentler",
+  "lessonId": "arriving",
+  "order": 1,
+  "status": "placeholder",
+  "title": "Arriving",
+  "subtitle": "Noticing where you already are",
+  "summary": "Before changing anything, it helps to simply notice that you are here. This lesson is about arriving in the present moment without judging it.",
+  "teaching": [
+    {
+      "type": "paragraph",
+      "text": "Most days begin in the middle. The mind is already ahead, listing what must be done, or behind, replaying something that has passed. Arriving is the small act of noticing that you are here, in this room, in this body, at this hour."
+    },
+    {
+      "type": "paragraph",
+      "text": "There is nothing to fix in this noticing. A tired body is allowed to be tired. A restless mind is allowed to be restless. You are only taking attendance, the way a teacher might quietly note who is in the room before the lesson begins."
+    },
+    {
+      "type": "heading",
+      "text": "Why it matters"
+    },
+    {
+      "type": "paragraph",
+      "text": "Slow, deliberate breathing and a moment of attention have been studied as simple ways to settle the body's stress response. They are not a cure for anything, and they do not need to be. They are a doorway, and doorways are meant to be walked through slowly."
+    },
+    {
+      "type": "quote",
+      "text": "You do not have to be anywhere else to begin.",
+      "attribution": "Placeholder line, to be replaced with the supplied lesson copy"
+    }
+  ],
+  "smallAction": {
+    "title": "Small Action",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The next time you pass through a doorway today, pause on the threshold for three slow breaths. Notice one thing you can see, one you can hear and one you can feel. Then carry on."
+      },
+      {
+        "type": "paragraph",
+        "text": "If you forget, that is fine. Doorways will be there tomorrow."
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": "NHS: Breathing exercises for stress",
+      "url": "https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/breathing-exercises-for-stress/",
+      "note": "A short, practical guide to slow breathing."
+    },
+    {
+      "label": "American Psychological Association: Stress",
+      "url": "https://www.apa.org/topics/stress",
+      "note": "Background reading on how stress affects the body."
+    }
+  ],
+  "reflectionQuestions": [
+    "Where in your body do you notice the day so far?",
+    "What is one thing in the room with you right now that you had not noticed?",
+    "If arriving had a colour or a temperature today, what would it be?"
+  ],
+  "encouragement": "You read this. That already counts as arriving. There is no next step you must take."
+}

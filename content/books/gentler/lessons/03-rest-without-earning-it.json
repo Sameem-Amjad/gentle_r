@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "bookId": "gentler",
+  "lessonId": "rest-without-earning-it",
+  "order": 3,
+  "status": "placeholder",
+  "title": "Rest Without Earning It",
+  "subtitle": "Letting rest be ordinary",
+  "summary": "Many of us treat rest as a reward for finishing. This lesson makes the case for rest as something ordinary, taken in small amounts, without a permission slip.",
+  "teaching": [
+    {
+      "type": "paragraph",
+      "text": "There is a quiet rule many people carry: rest comes after. After the list is done, after the inbox is empty, after everyone else is looked after. The list is never done, so the rest never comes, and tiredness becomes the ordinary weather of the day."
+    },
+    {
+      "type": "paragraph",
+      "text": "Rest does not have to be earned. Bodies and minds need it the way they need water, and we do not ask whether we have deserved a glass of water. Small, unearned rests are not laziness. They are maintenance."
+    },
+    {
+      "type": "heading",
+      "text": "What counts as rest"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Sitting by a window for ten minutes with nothing in your hands.",
+        "Lying down in the afternoon without needing to sleep.",
+        "A slow walk with no destination and no headphones.",
+        "Looking at something green for a while."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Sleep researchers and public health bodies consistently describe regular rest and sleep as foundations for mood, attention and physical health, rather than luxuries. The evidence points the same way: rest first, and the rest of the day tends to go better."
+    }
+  ],
+  "smallAction": {
+    "title": "Small Action",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Choose one ten-minute rest today that you have not earned. No screen, no task, no reason. If guilt shows up, let it sit beside you. It can rest too."
+      }
+    ]
+  },
+  "sources": [
+    {
+      "label": "NHS: Sleep and tiredness",
+      "url": "https://www.nhs.uk/live-well/sleep-and-tiredness/",
+      "note": "Plain guidance on sleep and everyday tiredness."
+    },
+    {
+      "label": "Sleep Foundation",
+      "url": "https://www.sleepfoundation.org/",
+      "note": "Background articles on rest, sleep and health."
+    }
+  ],
+  "reflectionQuestions": [
+    "When did you last rest without first finishing something?",
+    "What would a ten-minute unearned rest look like for you today?",
+    "Whose permission are you waiting for, and could you give it to yourself?"
+  ],
+  "encouragement": "If you rested while reading this, good. If you did not, there is no deadline. Rest is patient."
+}
