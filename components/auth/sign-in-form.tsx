@@ -13,6 +13,9 @@ import { useClientValidation } from "./use-client-validation";
 
 export function SignInForm({ next }: { next?: string }) {
   const [state, formAction, pending] = useActionState(signIn, initialActionState);
+  // Controlled, because React resets uncontrolled fields after every action:
+  // a failed attempt would otherwise empty the email box.
+  const [email, setEmail] = React.useState("");
   const { clientErrors, onSubmit } = useClientValidation(signInSchema);
 
   const fieldErrors = clientErrors ?? (state.ok ? undefined : state.fieldErrors);
@@ -33,6 +36,8 @@ export function SignInForm({ next }: { next?: string }) {
           <Input
             {...props}
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             autoComplete="email"
             inputMode="email"

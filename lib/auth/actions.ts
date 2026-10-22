@@ -14,6 +14,7 @@ import {
   mapAuthError,
   type AuthActionState,
 } from "./errors";
+import { isDemoAccount } from "./demo";
 import { resolveNextPath } from "./paths";
 import {
   deleteAccountSchema,
@@ -196,6 +197,7 @@ export async function updatePassword(_prev: AuthActionState, formData: FormData)
 
   const user = await getCurrentUser();
   if (!user) return fail(authCopy.recoverySessionEnded);
+  if (isDemoAccount(user)) return fail(authCopy.demoLocked);
 
   const parsed = resetPasswordSchema.safeParse(formDataToObject(formData, ["password", "confirmPassword"]));
   if (!parsed.success) return invalid(parsed.error);
@@ -256,6 +258,7 @@ export async function deleteAccount(_prev: AuthActionState, formData: FormData):
 
   const user = await getCurrentUser();
   if (!user) return fail(authCopy.sessionEnded);
+  if (isDemoAccount(user)) return fail(authCopy.demoLocked);
 
   // The dialog checks this too; the server is the one that counts.
   const parsed = deleteAccountSchema.safeParse(formDataToObject(formData, ["confirmation"]));

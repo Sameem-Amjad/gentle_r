@@ -11,6 +11,9 @@ import { useClientValidation } from "./use-client-validation";
 
 export function ForgotPasswordForm() {
   const [state, formAction, pending] = useActionState(requestPasswordReset, initialActionState);
+  // Controlled, because React resets uncontrolled fields after every action:
+  // a failed attempt would otherwise empty the email box.
+  const [email, setEmail] = React.useState("");
   const { clientErrors, onSubmit } = useClientValidation(forgotPasswordSchema);
 
   const fieldErrors = clientErrors ?? (state.ok ? undefined : state.fieldErrors);
@@ -29,6 +32,8 @@ export function ForgotPasswordForm() {
           <Input
             {...props}
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             autoComplete="email"
             inputMode="email"

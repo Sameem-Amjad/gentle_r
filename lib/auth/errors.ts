@@ -27,6 +27,7 @@ export const authCopy = {
   signupsClosed: "New accounts are not open at the moment. Please try again later.",
   deleteFailed: "We couldn't delete your account. Nothing has changed. Please try again or email support.",
   confirmationMismatch: 'Please type "delete" to confirm.',
+  demoLocked: "This is a shared demo account, so its password can't be changed and it can't be deleted.",
 } as const;
 
 /** The subset of an AuthError we ever look at. Never includes user content. */
