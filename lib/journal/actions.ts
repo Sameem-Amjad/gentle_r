@@ -53,7 +53,11 @@ export async function createEntry(input: unknown): Promise<CreateEntryResult> {
     return { ok: false, error: "save-failed" };
   }
 
-  revalidatePath("/journal");
+  // No revalidatePath here or in saveEntry: in a Server Function it re-renders
+  // the page being viewed, and once the editor has adopted /journal/<id> that
+  // is the [id] page, which remounts the editor with the row as it was a moment
+  // ago and drops whatever was typed since. The list is force-dynamic, so it is
+  // fresh on every visit anyway.
   return { ok: true, entry: toPayload(data) };
 }
 
@@ -85,10 +89,7 @@ export async function saveEntry(input: unknown): Promise<SaveEntryResult> {
     return { ok: false, error: "save-failed" };
   }
 
-  if (data) {
-    revalidatePath("/journal");
-    return { ok: true, entry: toPayload(data) };
-  }
+  if (data) return { ok: true, entry: toPayload(data) };
 
   // Nothing matched: either the entry is gone or another tab or device
   // saved a newer revision. Fetch the current row to tell the two apart.

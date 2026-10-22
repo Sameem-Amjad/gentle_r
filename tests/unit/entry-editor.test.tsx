@@ -107,6 +107,24 @@ describe("EntryEditor", () => {
     expect(screen.getByRole("button", { name: /Delete entry/ })).toBeInTheDocument();
   });
 
+  it("refreshes the next page after leaving an editor that saved, and not otherwise", async () => {
+    mocks.createEntry.mockResolvedValue({
+      ok: true,
+      entry: { id: ID, title: "", body: "Hello", created_at: NOW, updated_at: NOW, revision: 1 },
+    });
+    const first = renderEditor({ mode: "new" });
+    first.unmount();
+    expect(mocks.refresh).not.toHaveBeenCalled();
+
+    const second = renderEditor({ mode: "new" });
+    fireEvent.change(bodyField(), { target: { value: "Hello" } });
+    await settle(siteConfig.journal.autosaveDelayMs + 5);
+    expect(status()).toHaveTextContent(/Saved at/);
+    // Saves don't revalidate, so the journal list behind the Back button is refreshed here.
+    second.unmount();
+    expect(mocks.refresh).toHaveBeenCalledTimes(1);
+  });
+
   it("does not create an entry for whitespace only", async () => {
     renderEditor({ mode: "new" });
     fireEvent.change(bodyField(), { target: { value: "   \n" } });

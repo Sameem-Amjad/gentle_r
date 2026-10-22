@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { createEntry, saveEntry } from "@/lib/journal/actions";
 import {
@@ -42,6 +43,11 @@ export interface AutosaveApi {
  * immediate saves when the page is hidden or the editor is left.
  */
 export function useAutosave({ mode, entry }: UseAutosaveOptions): AutosaveApi {
+  const router = useRouter();
+  const routerRef = React.useRef(router);
+  React.useEffect(() => {
+    routerRef.current = router;
+  }, [router]);
   const [state, setState] = React.useState<AutosaveState>(() =>
     createInitialState(mode === "edit" ? entry : null),
   );
@@ -54,6 +60,9 @@ export function useAutosave({ mode, entry }: UseAutosaveOptions): AutosaveApi {
   const debounceRef = React.useRef<number | null>(null);
   const mountedRef = React.useRef(false);
   const armedRef = React.useRef(true);
+  // Set after any confirmed save. Saves don't revalidate (see lib/journal/actions.ts),
+  // so the page the person goes to next is refreshed when the editor unmounts.
+  const savedRef = React.useRef(false);
 
   const dispatch = React.useCallback((event: AutosaveEvent) => {
     const next = autosaveReducer(stateRef.current, event);
@@ -93,6 +102,7 @@ export function useAutosave({ mode, entry }: UseAutosaveOptions): AutosaveApi {
             dispatch({ type: "SAVE_FAILED", error: result.error });
             return false;
           }
+          savedRef.current = true;
           dispatch({ type: "SAVE_SUCCESS", entry: result.entry, at: new Date().toISOString() });
           if (!hasUnsavedWork(stateRef.current)) clearSafetyCopies(result.entry.id);
           if (mountedRef.current && armedRef.current) {
@@ -109,6 +119,7 @@ export function useAutosave({ mode, entry }: UseAutosaveOptions): AutosaveApi {
           expectedRevision: current.revision ?? 1,
         });
         if (result.ok) {
+          savedRef.current = true;
           dispatch({ type: "SAVE_SUCCESS", entry: result.entry, at: new Date().toISOString() });
           if (!hasUnsavedWork(stateRef.current)) clearSafetyCopies(result.entry.id);
           return true;
@@ -149,11 +160,19 @@ export function useAutosave({ mode, entry }: UseAutosaveOptions): AutosaveApi {
       mountedRef.current = false;
       clearDebounce();
       const current = stateRef.current;
+      // The journal list may be a cached copy from before these saves (the Back
+      // button shows it as it was), so fetch it again once the last save is in.
+      const refreshIfSaved = () => {
+        if (savedRef.current) routerRef.current.refresh();
+      };
       if (armedRef.current && hasUnsavedWork(current) && current.status !== "conflict") {
         writeLocalDraft(draftKey(current.entryId), current.draft);
         void runSave().then((saved) => {
           if (saved && !hasUnsavedWork(stateRef.current)) clearSafetyCopies(stateRef.current.entryId);
+          refreshIfSaved();
         });
+      } else {
+        refreshIfSaved();
       }
     };
   }, [clearDebounce, runSave, clearSafetyCopies]);
